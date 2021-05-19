@@ -10,12 +10,12 @@
 $data = require_once "data.php";
 
 // Par défaut, on imagine qu'aucun id n'a été précisé
-$id = null;
+$id = $currentRoute['id'];
 
 // Si un id est précisé en GET, on le prend
-if (isset($_GET['id'])) {
-    $id = $_GET['id'];
-}
+// if (isset($_GET['id'])) {
+//     $id = $_GET['id'];
+// }
 
 // Si aucun id n'est passé ou que l'id n'existe pas dans la liste des tâches, on arrête tout !
 if (!$id || !array_key_exists($id, $data)) {
@@ -42,7 +42,7 @@ $task = $data[$id];
     <p>
         La tâche est <strong><?= $task['completed'] ? "complétée" : "encore à faire" ?> !</strong>
     </p>
-    <a href="index.php">Retour à la liste</a> ou <a href="index.php?page=create">Créer une autre tâche</a>
+    <a href="<?= $generator->generate('list') ?>">Retour à la liste</a> ou <a href="<?= $generator->generate('create') ?>">Créer une autre tâche</a>
 </body>
 
 </html>
